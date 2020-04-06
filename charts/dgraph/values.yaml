@@ -177,7 +177,7 @@ alpha:
   ##
   service:
     type: ClusterIP
-    ip: localhost
+    ip: -
 
   ## dgraph Pod Security Context
   securityContext:
@@ -251,6 +251,7 @@ ratel:
   ##
   service:
     type: ClusterIP
+    ip: -
 
   ## dgraph Pod Security Context
   securityContext:
