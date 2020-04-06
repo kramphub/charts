@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ template "dgraph.alpha.fullname" . }}
+  annotations:
+    cloud.google.com/load-balancer-type: "Internal"
   labels:
     app: {{ template "dgraph.name" . }}
     chart: {{ template "dgraph.chart" . }}
@@ -11,6 +13,7 @@ metadata:
     monitor: {{ .Values.alpha.monitorLabel }}
 spec:
   type: {{ .Values.alpha.service.type }}
+  loadBalancerIP: {{ .Values.alpha.service.ip }}
   ports:
   - port: 8080
     targetPort: 8080
