@@ -177,7 +177,7 @@ alpha:
   ## 'ip' will be the internal static ip, this will replace 'loadBalancerIP' in alpha-svc.yaml
   service:
     type: ClusterIP
-    ip: "="
+    ip: "-"
 
   ## dgraph Pod Security Context
   securityContext:
