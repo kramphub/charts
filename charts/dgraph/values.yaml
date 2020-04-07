@@ -174,7 +174,7 @@ alpha:
 
   ## Kubernetes configuration
   ## For minikube, set this to NodePort, elsewhere use LoadBalancer
-  ##
+  ## 'ip' will be the internal static ip, this will replace 'loadBalancerIP' in alpha-svc.yaml
   service:
     type: ClusterIP
     ip: "="
@@ -248,7 +248,8 @@ ratel:
 
   ## Kubernetes configuration
   ## For minikube, set this to NodePort, elsewhere use ClusterIP or LoadBalancer
-  ##
+  ## 'ip' will be the internal static ip, this will replace 'loadBalancerIP' in ratel-svc.yaml
+
   service:
     type: ClusterIP
     ip: "-"
