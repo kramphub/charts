@@ -2,6 +2,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ template "dgraph.ratel.fullname" . }}
+  # This annotation will help to create internal TCP load balancer for gcloud
+  # Documentation: https://cloud.google.com/kubernetes-engine/docs/how-to/internal-load-balancing
+  # This required type as 'LoadBalancer' and we can specify static ip with 'loadBalancerIP'
+  annotations:
+    cloud.google.com/load-balancer-type: "Internal"
   labels:
     app: {{ template "dgraph.name" . }}
     chart: {{ template "dgraph.chart" . }}
@@ -10,6 +15,7 @@ metadata:
     heritage: {{ .Release.Service }}
 spec:
   type: {{ .Values.ratel.service.type }}
+  loadBalancerIP: {{ .Values.ratel.service.ip }}
   ports:
   - port: 8000
     targetPort: 8000

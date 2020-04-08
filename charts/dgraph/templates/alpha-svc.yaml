@@ -2,6 +2,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ template "dgraph.alpha.fullname" . }}
+  # This annotation will help to create internal TCP load balancer for gcloud
+  # Documentation: https://cloud.google.com/kubernetes-engine/docs/how-to/internal-load-balancing
+  # This required type as 'LoadBalancer' and we can specify static ip with 'loadBalancerIP'
+  annotations:
+    cloud.google.com/load-balancer-type: "Internal"
   labels:
     app: {{ template "dgraph.name" . }}
     chart: {{ template "dgraph.chart" . }}
@@ -11,6 +16,7 @@ metadata:
     monitor: {{ .Values.alpha.monitorLabel }}
 spec:
   type: {{ .Values.alpha.service.type }}
+  loadBalancerIP: {{ .Values.alpha.service.ip }}
   ports:
   - port: 8080
     targetPort: 8080
